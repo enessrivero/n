@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>.</title>
+<style>
+  body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: "Poppins", sans-serif;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 2em;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    margin-bottom: 40px;
+  }
+
+  .btn {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 28px;
+    font-size: 18px;
+    margin: 10px;
+    cursor: pointer;
+    color: #fff;
+    transition: all 0.2s ease;
+  }
+
+  #evet {
+    background-color: #4CAF50;
+  }
+
+  #hayir {
+    background-color: #f44336;
+  }
+
+  #evet:hover {
+    background-color: #45a049;
+  }
+
+  #hayir:hover {
+    background-color: #e53935;
+  }
+
+  #sonuc {
+    font-size: 1.6em;
+    color: #fff;
+    margin-top: 40px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  /* Basit kalp animasyonu */
+  @keyframes hearts {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+  }
+
+  .heart {
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+    animation: hearts 2s linear infinite;
+  }
+</style>
+</head>
+<body>
+
+<h1>Hocam 30 günlük deneme sürümüne yani flörtleşmeye başlayabilir miyiz? 💖</h1>
+<div>
+  <button id="evet" class="btn">Evet</button>
+  <button id="hayir" class="btn">Hayır</button>
+</div>
+<p id="sonuc"></p>
+
+<script>
+  const hayir = document.getElementById("hayir");
+  const evet = document.getElementById("evet");
+  const sonuc = document.getElementById("sonuc");
+
+  let size = 18;
+
+  hayir.addEventListener("click", () => {
+    size -= 2;
+    if (size > 6) {
+      hayir.style.fontSize = size + "px";
+      hayir.style.padding = size/2 + "px " + size + "px";
+    } else {
+      hayir.style.display = "none";
+    }
+  });
+
+  evet.addEventListener("click", () => {
+    sonuc.textContent = "Sizi gerçekten çok seviyorum, iyi ki varsınız... 💘";
+    sonuc.style.opacity = 1;
+    evet.style.display = "none";
+    hayir.style.display = "none";
+    createHearts();
+  });
+
+  function createHearts() {
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 1 + Math.random() * 2 + "s";
+      heart.textContent = "💖";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
+    }
+  }
+</script>
+
+</body>
+</html>
